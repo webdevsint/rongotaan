@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>নিবন্ধন করুন - রঙ্গতান</title>
+    <link rel="stylesheet" href="styles/globals.css" />
+    <link rel="stylesheet" href="styles/register.css" />
+  </head>
+  <body>
+    <main class="hero">
+      <div class="hero-image">
+        <a href="/"><img src="/assets/rongotaan.png" alt="রঙ্গতান" /></a>
+      </div>
+      <div class="hero-form">
+        <h1>নিবন্ধন করুন</h1>
+
+        <form action="/api/register" method="post">
+          <div>
+            <label for="name"><b>Your Name</b></label>
+            <input type="text" placeholder="..." name="name" required />
+          </div>
+
+          <div>
+            <label for="email"><b>Your Email Address</b></label>
+            <input type="email" placeholder="..." name="email" required />
+          </div>
+
+          <div>
+            <label for="contact"><b>Your Contact Number</b></label>
+            <input type="number" placeholder="..." name="contact" required />
+          </div>
+
+          <div>
+            <label for="transactionID"><b>Bkash Transaction ID</b></label>
+            <input
+              type="text"
+              placeholder="..."
+              name="transactionID"
+              required
+            />
+          </div>
+
+          <p>
+            Please make a deposit of <b>২৪০৳</b> to <b>01949974075</b> (Bkash)
+            to register.
+          </p>
+
+          <button type="submit"><b>Register</b></button>
+        </form>
+      </div>
+    </main>
+
+    <div class="copyright">
+      <p>
+        Developed by
+        <a href="https://nehanyaser.vercel.app/" target="_blank">Nehan Yaser</a>
+      </p>
+    </div>
+  </body>
+</html>

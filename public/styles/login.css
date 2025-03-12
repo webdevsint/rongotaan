@@ -1,0 +1,85 @@
+main {
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #fff3df;
+}
+
+main img {
+  width: calc(100% - 4rem);
+  max-width: 300px;
+  padding-inline: 2rem;
+}
+
+main h1 {
+  text-align: center;
+  color: #c45151;
+}
+
+form {
+  display: flex;
+  background: white;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 2rem;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  width: 300px;
+}
+
+.input-field {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.input-field label {
+  color: #c45151;
+  font-size: 14px;
+}
+
+.input-field input {
+  padding: 0.6rem 1rem;
+  background: white;
+  color: #c45151;
+  border: none;
+  outline: none;
+  border-radius: 3px;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+
+form button {
+  width: 100%;
+  padding: 0.6rem 1rem;
+  background: #c45151;
+  color: #fff3df;
+  border: none;
+  outline: none;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: 0.1s;
+}
+
+form button:hover {
+  background: #fff3df;
+  color: #c45151;
+}
+
+main a {
+  color: #c45151;
+}
+
+main a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 450px) {
+  form {
+    width: calc(100% - 8rem);
+  }
+}

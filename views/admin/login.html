@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - রঙ্গতান</title>
+    <link rel="stylesheet" href="styles/globals.css" />
+    <link rel="stylesheet" href="styles/login.css" />
+  </head>
+  <body>
+    <main>
+      <img src="/assets/rongotaan.png" alt="রঙ্গতান" />
+      <h1>Login to Admin Panel</h1>
+      <form action="/login" method="post">
+        <div class="input-field">
+          <label for="username"><b>Username:</b></label>
+          <input
+            type="text"
+            class="username"
+            name="username"
+            placeholder="...."
+            autocomplete="off"
+            autocapitalize="off"
+            required
+          />
+        </div>
+
+        <div class="input-field">
+          <label for="password"><b>Password:</b></label>
+          <input
+            class="password"
+            name="password"
+            type="password"
+            placeholder="...."
+            required
+          />
+        </div>
+        <button type="submit"><h4>Login</h4></button>
+      </form>
+
+      <a href="/" class="back">Return home.</a>
+    </main>
+
+    <script>
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const param = urlParams.get("success");
+
+      if (param === "false") {
+        alert("Invalid username or password!");
+      }
+    </script>
+  </body>
+</html>

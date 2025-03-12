@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registration Tokens - রঙ্গতান</title>
+    <link rel="stylesheet" href="/styles/globals.css" />
+    <link rel="stylesheet" href="/styles/tokens.css" />
+  </head>
+  <body>
+    <header>
+      <a href="/api/backup?key=nPmk2cLB" class="backup"><h4>Backup</h4></a>
+      <a href="/logout" class="logout"><h4>Logout</h4></a>
+    </header>
+
+    <main>
+      <div class="search-container">
+        <h1>Verify Token</h1>
+
+        <div class="input-container">
+          <label for="searchbox"><b>Token ID:</b></label>
+
+          <div class="input-field">
+            <input
+              type="text"
+              class="searchbox"
+              name="searchbox"
+              placeholder="...."
+            />
+            <button onclick="search()"><h4>Search</h4></button>
+          </div>
+        </div>
+
+        <div class="search-result"></div>
+      </div>
+
+      <section>
+        <h2>Pending Tokens:</h2>
+        <div class="pending-tokens"></div>
+      </section>
+
+      <section>
+        <h2>Approved Tokens:</h2>
+        <div class="approved-tokens"></div>
+      </section>
+    </main>
+
+    <script src="/scripts/tokens.js"></script>
+  </body>
+</html>

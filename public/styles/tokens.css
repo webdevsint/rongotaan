@@ -1,0 +1,109 @@
+header {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  padding: 1rem;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+header a,
+.token button {
+  padding: 0.6rem 1rem;
+  background: white;
+  border: none;
+  outline: none;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  transition: 0.1s;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.backup {
+  color: #2596be;
+}
+
+.backup:hover {
+  color: white;
+  background: #2596be;
+}
+
+.logout,
+.delete-button {
+  color: #c45151;
+}
+
+.logout:hover,
+.delete-button:hover {
+  background: #c45151;
+  color: #fff3df;
+}
+
+main {
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.search-container {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  border: 2px solid black;
+}
+
+.input-field label {
+  font-size: 14px;
+}
+
+.input-field input,
+.input-field button {
+  padding: 0.6rem 1rem;
+  border-radius: 0px;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: 0.1s;
+}
+
+.input-field button:hover {
+  background: #2596be;
+  color: white;
+}
+
+.search-result {
+  display: none;
+}
+
+.search-result .token {
+  border: none;
+  border-radius: 3px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.pending-tokens,
+.approved-tokens {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.tokens a {
+  color: black;
+}
+
+.token {
+  border: 2px solid black;
+  padding: 2rem;
+}
+
+.token button {
+  margin-right: 1rem;
+}

@@ -1,0 +1,109 @@
+const express = require("express");
+const { nanoid } = require("nanoid");
+const path = require("path");
+const fs = require("fs");
+require("dotenv").config();
+
+const key = process.env.API_KEY;
+
+const router = express.Router();
+
+function saveData(payload) {
+  let data = require("../data.json");
+  data.push(payload);
+  fs.writeFileSync(path.resolve("./data.json"), JSON.stringify(data));
+}
+
+function findIndexById(array, id) {
+  return array.findIndex((obj) => obj.id === id);
+}
+
+function getCurrentDateFormatted() {
+  const now = new Date();
+  const day = String(now.getDate()).padStart(2, "0");
+  const month = String(now.getMonth() + 1).padStart(2, "0"); // Months are 0-indexed
+  const year = now.getFullYear();
+
+  return `${day}-${month}-${year}`;
+}
+
+router.get("/tokens", (req, res) => {
+  if (req.query.key === key) {
+    const data = require("../data.json");
+
+    res.json(data);
+  } else res.json({ message: "Invalid API Key!" });
+});
+
+router.get("/backup", (req, res) => {
+  if (req.query.key === key) {
+    res.download(
+      path.resolve("./data.json"),
+      `${getCurrentDateFormatted()}.json`
+    );
+  } else res.json({ message: "Invalid API Key!" });
+});
+
+router.get("/token/:id", (req, res) => {
+  if (req.query.key === key) {
+    const data = require("../data.json");
+    const token = data.filter((token) => token.id === req.params.id);
+
+    if (token.length > 0) {
+      res.json(token[0]);
+    } else res.json({ message: "Token not found!" });
+  } else res.json({ message: "Invalid API Key!" });
+});
+
+router.delete("/token/:id", (req, res) => {
+  if (req.query.key === key) {
+    let data = require("../data.json");
+    const id = req.params.id;
+
+    const index = findIndexById(data, id);
+
+    data.splice(index, 1);
+
+    fs.writeFileSync(path.resolve("./data.json"), JSON.stringify(data));
+
+    res.json({ message: "Token Deleted!" });
+  } else res.json({ message: "Invalid API Key!" });
+});
+
+router.post("/register", (req, res) => {
+  const name = req.body.name;
+  const email = req.body.email;
+  const contact = req.body.contact;
+  const transactionID = req.body.transactionID;
+
+  const payload = {
+    id: nanoid(8),
+    name,
+    email,
+    contact,
+    transactionID,
+    approved: false,
+  };
+
+  saveData(payload);
+
+  res.redirect("/register-success");
+});
+
+router.post("/approve/:id", (req, res) => {
+  if (req.query.key === key) {
+    const id = req.params.id;
+    const data = require("../data.json");
+
+    const index = findIndexById(data, id);
+
+    if (index > -1) {
+      data[index].approved = true;
+      fs.writeFileSync(path.resolve("./data.json"), JSON.stringify(data));
+
+      res.json({ message: "Token verified!" });
+    } else res.json({ message: "Token not found!" });
+  } else res.json({ message: "Invalid API Key!" });
+});
+
+module.exports = router;

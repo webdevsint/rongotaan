@@ -1,0 +1,111 @@
+.hero {
+  display: flex;
+  height: 100vh;
+  width: auto;
+}
+
+.hero-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem;
+  max-width: 500px;
+}
+
+.hero-image img {
+  width: 100%;
+}
+
+.hero-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: #c45151;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+  width: calc(100vw - 500px);
+}
+
+.hero-form h1,
+.hero-form p {
+  text-align: justify;
+  color: #fff3df;
+  font-family: "Outfit", sans-serif;
+}
+
+.hero-form h1 {
+  text-decoration: underline;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+form p {
+  max-width: 400px;
+}
+
+form div {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  color: #fff3df;
+}
+
+label {
+  font-size: 14px;
+}
+
+input {
+  /* width: calc(400px - 6rem); */
+  max-width: 400px;
+  padding: 0.6rem 1rem;
+  background: white;
+  color: #c45151;
+  border: none;
+  outline: none;
+  border-radius: 3px;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+
+button {
+  padding: 0.6rem 1rem;
+  background: #fff3df;
+  color: #c45151;
+  border: none;
+  outline: none;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  transition: 0.1s;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+button:hover {
+  background: #c45151;
+  color: #fff3df;
+}
+
+@media (max-width: 800px) {
+  .hero {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .hero-image {
+    width: calc(100% - 8rem);
+    max-width: none;
+  }
+
+  .hero-image img {
+    max-width: 450px;
+  }
+
+  .hero-form {
+    width: calc(100% - 6rem);
+  }
+}
