@@ -36,15 +36,7 @@ function validateEmail(email) {
 router.get("/tokens", (req, res) => {
   let ip = req.ip;
 
-  if (ip.substr(0, 7) === "::ffff:") {
-    ip = ip.substr(7);
-  }
-
-  if (
-    ip === "13.228.225.19" ||
-    ip === "18.142.128.26" ||
-    ip === "54.254.162.138"
-  ) {
+  if (ip === "::1") {
     if (req.query.key === key) {
       const data = require("../data.json");
 
@@ -56,15 +48,7 @@ router.get("/tokens", (req, res) => {
 router.get("/backup", (req, res) => {
   let ip = req.ip;
 
-  if (ip.substr(0, 7) === "::ffff:") {
-    ip = ip.substr(7);
-  }
-
-  if (
-    ip === "13.228.225.19" ||
-    ip === "18.142.128.26" ||
-    ip === "54.254.162.138"
-  ) {
+  if (ip === "::1") {
     if (req.query.key === key) {
       res.download(
         path.resolve("./data.json"),
@@ -77,15 +61,7 @@ router.get("/backup", (req, res) => {
 router.get("/token/:id", (req, res) => {
   let ip = req.ip;
 
-  if (ip.substr(0, 7) === "::ffff:") {
-    ip = ip.substr(7);
-  }
-
-  if (
-    ip === "13.228.225.19" ||
-    ip === "18.142.128.26" ||
-    ip === "54.254.162.138"
-  ) {
+  if (ip === "::1") {
     if (req.query.key === key) {
       const data = require("../data.json");
       const token = data.filter((token) => token.id === req.params.id);
@@ -100,15 +76,7 @@ router.get("/token/:id", (req, res) => {
 router.delete("/token/:id", (req, res) => {
   let ip = req.ip;
 
-  if (ip.substr(0, 7) === "::ffff:") {
-    ip = ip.substr(7);
-  }
-
-  if (
-    ip === "13.228.225.19" ||
-    ip === "18.142.128.26" ||
-    ip === "54.254.162.138"
-  ) {
+  if (ip === "::1") {
     if (req.query.key === key) {
       let data = require("../data.json");
       const id = req.params.id;
@@ -127,15 +95,7 @@ router.delete("/token/:id", (req, res) => {
 router.post("/register", (req, res) => {
   let ip = req.ip;
 
-  if (ip.substr(0, 7) === "::ffff:") {
-    ip = ip.substr(7);
-  }
-
-  if (
-    ip === "13.228.225.19" ||
-    ip === "18.142.128.26" ||
-    ip === "54.254.162.138"
-  ) {
+  if (ip === "::1") {
     const name = req.body.name;
     const email = req.body.email;
     const contact = req.body.contact;
@@ -165,15 +125,7 @@ router.post("/register", (req, res) => {
 router.post("/approve/:id", (req, res) => {
   let ip = req.ip;
 
-  if (ip.substr(0, 7) === "::ffff:") {
-    ip = ip.substr(7);
-  }
-
-  if (
-    ip === "13.228.225.19" ||
-    ip === "18.142.128.26" ||
-    ip === "54.254.162.138"
-  ) {
+  if (ip === "::1") {
     if (req.query.key === key) {
       const id = req.params.id;
       const data = require("../data.json");
