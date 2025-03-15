@@ -24,7 +24,9 @@ app.use(
 app.use(express.static(path.resolve("./public")));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors({
+  origin: "https://rongotaan.onrender.com/"
+}));
 
 app.get("/", (req, res) => {
   res.sendFile(path.resolve("./views/index.html"));

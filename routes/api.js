@@ -1,5 +1,6 @@
 const express = require("express");
 const { nanoid } = require("nanoid");
+const {phone} = require('phone');
 const path = require("path");
 const fs = require("fs");
 require("dotenv").config();
@@ -25,6 +26,11 @@ function getCurrentDateFormatted() {
   const year = now.getFullYear();
 
   return `${day}-${month}-${year}`;
+}
+
+function validateEmail(email) {
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  return regex.test(email);
 }
 
 router.get("/tokens", (req, res) => {
@@ -76,18 +82,25 @@ router.post("/register", (req, res) => {
   const contact = req.body.contact;
   const transactionID = req.body.transactionID;
 
-  const payload = {
-    id: nanoid(8),
-    name,
-    email,
-    contact,
-    transactionID,
-    approved: false,
-  };
+  if (validateEmail(email)) {
+    if (phone(contact, {country: 'BD'}).isValid) {
+      const payload = {
+        id: nanoid(8),
+        name,
+        email,
+        contact,
+        transactionID,
+        approved: false,
+      };
+    
+      saveData(payload);
+    
+      res.redirect("/register-success");
+    } else {
+      res.json({ message: "Invalid Phone Number!"})
+    }
 
-  saveData(payload);
-
-  res.redirect("/register-success");
+  } else res.json({ message: "Invalid Email Address!"})
 });
 
 router.post("/approve/:id", (req, res) => {
