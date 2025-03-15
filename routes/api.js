@@ -34,34 +34,23 @@ function validateEmail(email) {
 }
 
 router.get("/tokens", (req, res) => {
-  let ip = req.ip;
-
-  if (ip === "::1") {
     if (req.query.key === key) {
       const data = require("../data.json");
 
       res.json(data);
     } else res.json({ message: "Invalid API Key!" });
-  } else res.sendStatus(403);
 });
 
 router.get("/backup", (req, res) => {
-  let ip = req.ip;
-
-  if (ip === "::1") {
     if (req.query.key === key) {
       res.download(
         path.resolve("./data.json"),
         `${getCurrentDateFormatted()}.json`
       );
     } else res.json({ message: "Invalid API Key!" });
-  } else res.sendStatus(403);
 });
 
 router.get("/token/:id", (req, res) => {
-  let ip = req.ip;
-
-  if (ip === "::1") {
     if (req.query.key === key) {
       const data = require("../data.json");
       const token = data.filter((token) => token.id === req.params.id);
@@ -70,13 +59,9 @@ router.get("/token/:id", (req, res) => {
         res.json(token[0]);
       } else res.json({ message: "Token not found!" });
     } else res.json({ message: "Invalid API Key!" });
-  } else res.sendStatus(403);
 });
 
 router.delete("/token/:id", (req, res) => {
-  let ip = req.ip;
-
-  if (ip === "::1") {
     if (req.query.key === key) {
       let data = require("../data.json");
       const id = req.params.id;
@@ -89,13 +74,9 @@ router.delete("/token/:id", (req, res) => {
 
       res.json({ message: "Token Deleted!" });
     } else res.json({ message: "Invalid API Key!" });
-  } else res.sendStatus(403);
 });
 
 router.post("/register", (req, res) => {
-  let ip = req.ip;
-
-  if (ip === "::1") {
     const name = req.body.name;
     const email = req.body.email;
     const contact = req.body.contact;
@@ -119,13 +100,9 @@ router.post("/register", (req, res) => {
         res.json({ message: "Invalid Phone Number!" });
       }
     } else res.json({ message: "Invalid Email Address!" });
-  } else res.sendStatus(403);
 });
 
 router.post("/approve/:id", (req, res) => {
-  let ip = req.ip;
-
-  if (ip === "::1") {
     if (req.query.key === key) {
       const id = req.params.id;
       const data = require("../data.json");
@@ -139,7 +116,6 @@ router.post("/approve/:id", (req, res) => {
         res.json({ message: "Token verified!" });
       } else res.json({ message: "Token not found!" });
     } else res.json({ message: "Invalid API Key!" });
-  } else res.sendStatus(403);
 });
 
 module.exports = router;
