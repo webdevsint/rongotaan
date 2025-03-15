@@ -13,7 +13,7 @@ function renderToken(arr, parent) {
     verifyButton.onclick = () => {
       id = token.id;
 
-      fetch(`/api/approve/${id}?key=nPmk2cLB`, {
+      fetch(`/api/approve/${id}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -39,7 +39,7 @@ function renderToken(arr, parent) {
     deleteButton.ondblclick = () => {
       id = token.id;
 
-      fetch(`/api/token/${id}?key=nPmk2cLB`, {
+      fetch(`/api/token/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -79,7 +79,7 @@ function renderTokens(data) {
   renderToken(pendingTokens, ".pending-tokens");
 }
 
-fetch("/api/tokens?key=nPmk2cLB")
+fetch("/api/tokens")
   .then((response) => response.json())
   .then((data) => renderTokens(data))
   .catch((error) => console.error("Error:", error));
