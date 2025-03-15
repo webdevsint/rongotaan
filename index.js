@@ -28,6 +28,8 @@ app.use(cors({
   origin: "https://rongotaan.onrender.com/"
 }));
 
+app.set('trust proxy', true);
+
 app.get("/", (req, res) => {
   res.sendFile(path.resolve("./views/index.html"));
 });
