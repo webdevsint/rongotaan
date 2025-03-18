@@ -60,7 +60,6 @@ label {
 }
 
 input {
-  /* width: calc(400px - 6rem); */
   max-width: 400px;
   padding: 0.6rem 1rem;
   background: white;
@@ -97,7 +96,7 @@ button:hover {
   }
 
   .hero-image {
-    width: calc(100% - 8rem);
+    width: auto;
     max-width: none;
   }
 
@@ -107,5 +106,16 @@ button:hover {
 
   .hero-form {
     width: calc(100% - 6rem);
+  }
+}
+
+@media (max-width: 400px) {
+  .hero-image {
+    padding: 3rem;
+  }
+
+  .hero-form {
+    padding: 2rem;
+    width: calc(100% - 4rem);
   }
 }
