@@ -34,88 +34,88 @@ function validateEmail(email) {
 }
 
 router.get("/tokens", (req, res) => {
-    if (req.query.key === key) {
-      const data = require("../data.json");
+  if (req.query.key === key) {
+    const data = require("../data.json");
 
-      res.json(data);
-    } else res.json({ message: "Invalid API Key!" });
+    res.json(data);
+  } else res.json({ message: "Invalid API Key!" });
 });
 
 router.get("/backup", (req, res) => {
-    if (req.query.key === key) {
-      res.download(
-        path.resolve("./data.json"),
-        `${getCurrentDateFormatted()}.json`
-      );
-    } else res.json({ message: "Invalid API Key!" });
+  if (req.query.key === key) {
+    res.download(
+      path.resolve("./data.json"),
+      `${getCurrentDateFormatted()}.json`
+    );
+  } else res.json({ message: "Invalid API Key!" });
 });
 
 router.get("/token/:id", (req, res) => {
-    if (req.query.key === key) {
-      const data = require("../data.json");
-      const token = data.filter((token) => token.id === req.params.id);
+  if (req.query.key === key) {
+    const data = require("../data.json");
+    const token = data.filter((token) => token.id === req.params.id);
 
-      if (token.length > 0) {
-        res.json(token[0]);
-      } else res.json({ message: "Token not found!" });
-    } else res.json({ message: "Invalid API Key!" });
+    if (token.length > 0) {
+      res.json(token[0]);
+    } else res.json({ message: "Token not found!" });
+  } else res.json({ message: "Invalid API Key!" });
 });
 
 router.delete("/token/:id", (req, res) => {
-    if (req.query.key === key) {
-      let data = require("../data.json");
-      const id = req.params.id;
+  if (req.query.key === key) {
+    let data = require("../data.json");
+    const id = req.params.id;
 
-      const index = findIndexById(data, id);
+    const index = findIndexById(data, id);
 
-      data.splice(index, 1);
+    data.splice(index, 1);
 
-      fs.writeFileSync(path.resolve("./data.json"), JSON.stringify(data));
+    fs.writeFileSync(path.resolve("./data.json"), JSON.stringify(data));
 
-      res.json({ message: "Token Deleted!" });
-    } else res.json({ message: "Invalid API Key!" });
+    res.json({ message: "Token Deleted!" });
+  } else res.json({ message: "Invalid API Key!" });
 });
 
 router.post("/register", (req, res) => {
-    const name = req.body.name;
-    const email = req.body.email;
-    const contact = req.body.contact;
-    const transactionID = req.body.transactionID;
+  const name = req.body.name;
+  const email = req.body.email;
+  const contact = req.body.contact;
+  const transactionID = req.body.transactionID;
 
-    if (validateEmail(email)) {
-      if (phone(contact, { country: "BD" }).isValid) {
-        const payload = {
-          id: nanoid(8),
-          name,
-          email,
-          contact,
-          transactionID,
-          approved: false,
-        };
+  if (validateEmail(email)) {
+    if (phone(contact, { country: "BD" }).isValid) {
+      const payload = {
+        id: nanoid(8),
+        name,
+        email,
+        contact,
+        transactionID,
+        approved: false,
+      };
 
-        saveData(payload);
+      saveData(payload);
 
-        res.redirect("/register-success");
-      } else {
-        res.json({ message: "Invalid Phone Number!" });
-      }
-    } else res.json({ message: "Invalid Email Address!" });
+      res.redirect("/register-success");
+    } else {
+      res.redirect("/registration-failed");
+    }
+  } else res.redirect("/registration-failed");
 });
 
 router.post("/approve/:id", (req, res) => {
-    if (req.query.key === key) {
-      const id = req.params.id;
-      const data = require("../data.json");
+  if (req.query.key === key) {
+    const id = req.params.id;
+    const data = require("../data.json");
 
-      const index = findIndexById(data, id);
+    const index = findIndexById(data, id);
 
-      if (index > -1) {
-        data[index].approved = true;
-        fs.writeFileSync(path.resolve("./data.json"), JSON.stringify(data));
+    if (index > -1) {
+      data[index].approved = true;
+      fs.writeFileSync(path.resolve("./data.json"), JSON.stringify(data));
 
-        res.json({ message: "Token verified!" });
-      } else res.json({ message: "Token not found!" });
-    } else res.json({ message: "Invalid API Key!" });
+      res.json({ message: "Token verified!" });
+    } else res.json({ message: "Token not found!" });
+  } else res.json({ message: "Invalid API Key!" });
 });
 
 module.exports = router;
