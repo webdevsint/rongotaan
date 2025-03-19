@@ -42,6 +42,10 @@ app.get("/register-success", (req, res) => {
   res.sendFile(path.resolve("./views/register_success.html"));
 });
 
+app.get("/registration-failed", (req, res) => {
+  res.sendFile(path.resolve("./views/error.html"));
+});
+
 app.use("/admin", adminRoutes);
 app.use("/api", apiRoutes);
 
@@ -70,6 +74,10 @@ app.post("/login", (req, res) => {
 app.get("/logout", (req, res) => {
   req.session.destroy();
   res.redirect("/login");
+});
+
+app.get("*", function (req, res) {
+  res.status(404).sendFile(path.resolve("./views/404.html"));
 });
 
 app.listen(5000, () => console.log('Server started on http://localhost:5000/'));
