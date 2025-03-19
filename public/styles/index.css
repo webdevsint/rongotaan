@@ -1,5 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
 
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
 .hero {
   display: flex;
   height: 100vh;
@@ -75,6 +84,14 @@ section {
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
     rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+
+.video-overlay i {
+  width: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fade 1s linear;
 }
 
 section video {
@@ -210,6 +227,14 @@ iframe {
   }
 }
 
+@media (max-width: 500px) {
+  .video-overlay {
+    padding: 0.5rem;
+    top: 1rem;
+    right: 1rem;
+  }
+}
+
 @media (max-width: 400px) {
   .logo-container {
     padding: 3rem;
@@ -218,6 +243,10 @@ iframe {
   .hero-text,
   main {
     padding: 2rem;
+  }
+
+  .video-overlay {
+    font-size: 20px;
   }
 
   iframe {
