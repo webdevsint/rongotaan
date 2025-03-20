@@ -91,6 +91,7 @@ router.post("/register", (req, res) => {
         email,
         contact,
         day,
+        receivable: (day === "15th & 16th April, 2025" ? '480 Taka': '240 Taka'),
         transactionID,
         approved: false,
       };
