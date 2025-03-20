@@ -59,7 +59,7 @@ label {
   font-size: 14px;
 }
 
-input {
+input, select {
   max-width: 400px;
   padding: 0.6rem 1rem;
   background: white;

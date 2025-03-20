@@ -53,6 +53,23 @@
           </div>
 
           <div>
+            <label for="day"><b>Select Day</b></label>
+
+            <select name="day" id="daySelect">
+              <option value="15th April, 2025">15th April, 2025</option>
+              <option value="16th April, 2025">16th April, 2025</option>
+              <option value="15th & 16th April, 2025">
+                15th & 16th April, 2025
+              </option>
+            </select>
+          </div>
+
+          <p>
+            Registration Fee: <b>২৪০৳/day</b>. Pay via <b>bKash</b> (Send Money)
+            to <b>01949974075</b>.
+          </p>
+
+          <div>
             <label for="transactionID"><b>Bkash Transaction ID</b></label>
             <input
               type="text"
@@ -62,10 +79,7 @@
             />
           </div>
 
-          <p>
-            Please make a deposit <b>(send money)</b> of <b>২৪০৳</b> to
-            <b>01949974075</b> (Bkash) to register.
-          </p>
+          <p id="receivable">Receivable Amount: <b>240 Taka</b></p>
 
           <button type="submit"><b>Register</b></button>
         </form>
@@ -78,5 +92,18 @@
         <a href="https://nehanyaser.vercel.app/" target="_blank">Nehan Yaser</a>
       </p>
     </div>
+
+    <script>
+      const daySelect = document.getElementById("daySelect");
+      const receivableAmount = document.getElementById("receivable");
+
+      daySelect.addEventListener("change", function () {
+        if (this.value === "15th & 16th April, 2025") {
+          receivableAmount.innerHTML = "Receivable Amount: <b>480 Taka</b>";
+        } else {
+          receivableAmount.innerHTML = "Receivable Amount: <b>240 Taka</b>";
+        }
+      });
+    </script>
   </body>
 </html>

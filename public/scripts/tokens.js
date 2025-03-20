@@ -5,7 +5,7 @@ function renderToken(arr, parent) {
     const container = document.querySelector(parent);
     const div = document.createElement("div");
     div.className = "token";
-    div.innerHTML = `<p>token id: ${token.id}</p><p>name: ${token.name}</p><p>email: ${token.email}</p><p>contact: ${token.contact}</p><p>transaction ID: ${token.transactionID}</p><h3>token approved: ${token.approved}</h3>`;
+    div.innerHTML = `<p>Token ID: ${token.id}</p><p>name: ${token.name}</p><p>Email: ${token.email}</p><p>Contact: ${token.contact}</p><p>Date Valid: ${token.day}</p><p>Transaction ID: ${token.transactionID}</p><h3>Token Approved: ${token.approved}</h3>`;
 
     const verifyButton = document.createElement("button");
     verifyButton.className = "verify-button";

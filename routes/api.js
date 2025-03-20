@@ -80,6 +80,7 @@ router.post("/register", (req, res) => {
   const name = req.body.name;
   const email = req.body.email;
   const contact = req.body.contact;
+  const day = req.body.day;
   const transactionID = req.body.transactionID;
 
   if (validateEmail(email)) {
@@ -89,6 +90,7 @@ router.post("/register", (req, res) => {
         name,
         email,
         contact,
+        day,
         transactionID,
         approved: false,
       };
