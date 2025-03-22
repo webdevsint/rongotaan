@@ -7,6 +7,7 @@ function isIOS() {
 
 if (!isIOS()) {
   video.removeAttribute("controls");
+  muteButton.style.display = 'block'
 
   muteButton.addEventListener("click", () => {
     if (video.muted) {
