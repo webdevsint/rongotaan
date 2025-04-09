@@ -49,15 +49,22 @@ canvas {
   display: none;
 }
 
+.day-select {
+  padding: 2rem;
+  padding-bottom: 0;
+  display: none;
+}
+
 #ticket {
   display: none;
 }
 
 .ticket-container {
-  margin: 1rem;
+  margin: 2rem;
   width: 400px;
   height: 565px;
   position: relative;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
 }
 
 .ticket-container img {

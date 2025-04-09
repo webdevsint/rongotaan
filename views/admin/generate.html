@@ -12,7 +12,7 @@
       <h1>Generate Ticket</h1>
 
       <div class="form-input">
-        <label for="barcodeValue"><b>Token ID:</b></label> <br>
+        <label for="barcodeValue"><b>Token ID:</b></label> <br />
         <input
           type="text"
           id="barcodeValue"
@@ -28,6 +28,15 @@
     </div>
 
     <canvas id="barcodeCanvas"></canvas>
+
+    <div class="day-select">
+      <label for="day">Select Day:</label>
+
+      <select name="day" class="day">
+        <option value="Day 1">Day 1</option>
+        <option value="Day 2">Day 2</option>
+      </select>
+    </div>
 
     <div class="ticket-container" id="ticket">
       <img class="ticket-bg" />
@@ -52,7 +61,6 @@
     </div>
 
     <button
-      onclick="downloadScreenshot('ticket',  `${document.getElementById('barcodeValue').value.trim()} - Rongotaan 1432`)"
       class="download-btn"
     >
       <b>Download</b>
@@ -60,6 +68,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="/scripts/generate.js"></script>
   </body>
 </html>

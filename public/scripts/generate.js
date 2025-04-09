@@ -22,48 +22,110 @@ function generateBarcode() {
     fetch(`/api/token/${barcodeValue}?key=nPmk2cLB`)
       .then((response) => response.json())
       .then((data) => {
-        if (data.message !== 'Token not found!') {
-          
-        if (data.approved) {
-          if (data.name) {
-            if (data.day === "15th April, 2025") {
-              document.querySelector(".ticket-bg").src = "/assets/day1_bg.png";
-              document.querySelector(".ticket-hero").src =
-                "/assets/day1_ticket.png";
+        if (data.message !== "Token not found!") {
+          if (data.approved) {
+            if (data.name) {
+              if (data.day === "15th April, 2025") {
+                document.querySelector(".day-select").style.display = "none";
+                document.querySelector(".ticket-bg").src =
+                  "/assets/day1_bg.png";
+                document.querySelector(".ticket-hero").src =
+                  "/assets/day1_ticket.png";
+                document.querySelector(".download-btn").onclick = () =>
+                  downloadAsPDF(
+                    "ticket",
+                    `${document
+                      .getElementById("barcodeValue")
+                      .value.trim()} - Rongotaan 1432 Day 1`
+                  );
+              } else if (data.day === "16th April, 2025") {
+                document.querySelector(".day-select").style.display = "none";
+                document.querySelector(".ticket-bg").src =
+                  "/assets/day2_bg.png";
+                document.querySelector(".ticket-hero").src =
+                  "/assets/day2_ticket.png";
+                document.querySelector(".download-btn").onclick = () =>
+                  downloadAsPDF(
+                    "ticket",
+                    `${document
+                      .getElementById("barcodeValue")
+                      .value.trim()} - Rongotaan 1432 Day 2`
+                  );
+              } else {
+                document.querySelector(".day-select").style.display = "block";
+
+                document.querySelector(".ticket-bg").src =
+                  "/assets/day1_bg.png";
+                document.querySelector(".ticket-hero").src =
+                  "/assets/day1_ticket.png";
+
+                document.querySelector(".download-btn").onclick = () =>
+                  downloadAsPDF(
+                    "ticket",
+                    `${document
+                      .getElementById("barcodeValue")
+                      .value.trim()} - Rongotaan 1432 Day 1`
+                  );
+
+                document.querySelector(".day").onchange = () => {
+                  const day = document.querySelector(".day").value;
+
+                  if (day === "Day 1") {
+                    document.querySelector(".ticket-bg").src =
+                      "/assets/day1_bg.png";
+                    document.querySelector(".ticket-hero").src =
+                      "/assets/day1_ticket.png";
+                    document.querySelector(".download-btn").onclick = () =>
+                      downloadAsPDF(
+                        "ticket",
+                        `${document
+                          .getElementById("barcodeValue")
+                          .value.trim()} - Rongotaan 1432 Day 1`
+                      );
+                  } else if (day === "Day 2") {
+                    document.querySelector(".ticket-bg").src =
+                      "/assets/day2_bg.png";
+                    document.querySelector(".ticket-hero").src =
+                      "/assets/day2_ticket.png";
+                    document.querySelector(".download-btn").onclick = () =>
+                      downloadAsPDF(
+                        "ticket",
+                        `${document
+                          .getElementById("barcodeValue")
+                          .value.trim()} - Rongotaan 1432 Day 2`
+                      );
+                  }
+                };
+              }
+
+              JsBarcode(barcodeCanvas, barcodeValue, {
+                format: "CODE128",
+                lineColor: "#000",
+                background: "transparent",
+                width: 2,
+                height: 100,
+                displayValue: false,
+              });
+
+              document.querySelector(".greeting-name").innerHTML = data.name;
+
+              document.querySelector("#barcode-preview-1").src =
+                canvasToBase64("barcodeCanvas");
+              document.querySelector("#barcode-preview-2").src =
+                canvasToBase64("barcodeCanvas");
+
+              document.querySelector("#ticket").style.display = "block";
+              document.querySelector(".download-btn").style.display = "block";
             } else {
-              document.querySelector(".ticket-bg").src = "/assets/day2_bg.png";
-              document.querySelector(".ticket-hero").src =
-                "/assets/day2_ticket.png";
+              const ctx = barcodeCanvas.getContext("2d");
+              ctx.clearRect(0, 0, barcodeCanvas.width, barcodeCanvas.height);
+              document.querySelector("#ticket").style.display = "none";
+              document.querySelector(".download-btn").style.display = "none";
+              alert(data.message);
             }
-
-            JsBarcode(barcodeCanvas, barcodeValue, {
-              format: "CODE128",
-              lineColor: "#000",
-              background: "transparent",
-              width: 2,
-              height: 100,
-              displayValue: false,
-            });
-
-            document.querySelector(".greeting-name").innerHTML = data.name;
-
-            document.querySelector("#barcode-preview-1").src =
-              canvasToBase64("barcodeCanvas");
-            document.querySelector("#barcode-preview-2").src =
-              canvasToBase64("barcodeCanvas");
-
-            document.querySelector("#ticket").style.display = "block";
-            document.querySelector(".download-btn").style.display = "block";
           } else {
-            const ctx = barcodeCanvas.getContext("2d");
-            ctx.clearRect(0, 0, barcodeCanvas.width, barcodeCanvas.height);
-            document.querySelector("#ticket").style.display = "none";
-            document.querySelector(".download-btn").style.display = "none";
-            alert(data.message);
+            alert("Token not approved!");
           }
-        } else {
-          alert("Token not approved!");
-        }
         } else {
           alert("Token not found!");
         }
@@ -109,15 +171,24 @@ async function captureScreenshot(elementId) {
   }
 }
 
-async function downloadScreenshot(elementId, filename) {
+async function downloadAsPDF(elementId, filename) {
   const imageDataURL = await captureScreenshot(elementId);
 
   if (imageDataURL) {
-    const link = document.createElement("a");
-    link.href = imageDataURL;
-    link.download = filename;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    const img = new Image();
+    img.onload = function () {
+      const imgWidth = img.width;
+      const imgHeight = img.height;
+
+      const pdf = new jspdf.jsPDF({
+        orientation: imgWidth >= imgHeight ? "l" : "p",
+        unit: "px",
+        format: [imgWidth, imgHeight],
+      });
+      pdf.addImage(imageDataURL, "PNG", 0, 0, imgWidth, imgHeight);
+
+      pdf.save(`${filename}.pdf`);
+    };
+    img.src = imageDataURL;
   }
 }
