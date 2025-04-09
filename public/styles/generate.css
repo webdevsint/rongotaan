@@ -112,8 +112,9 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 3rem;
+  gap: 2.5rem;
   width: 400px;
+  margin-top: 2.5rem;
 }
 
 .ticket section {
