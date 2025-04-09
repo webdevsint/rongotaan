@@ -35,7 +35,8 @@ function renderToken(arr, parent) {
 
     const generateButton = document.createElement("button");
     generateButton.className = "generate-button";
-    generateButton.innerHTML = `<a href='/admin/generate?token=${token.id}'><h4>Generate Ticket</h4></a>`;
+    generateButton.innerHTML = `<h4>Generate Ticket</h4>`;
+    generateButton.onclick = () => window.location = `/admin/generate?token=${token.id}`
 
     if (token.approved === true) {
       div.appendChild(generateButton);
