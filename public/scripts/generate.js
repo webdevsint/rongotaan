@@ -22,6 +22,8 @@ function generateBarcode() {
     fetch(`/api/token/${barcodeValue}?key=nPmk2cLB`)
       .then((response) => response.json())
       .then((data) => {
+        if (data.message !== 'Token not found!') {
+          
         if (data.approved) {
           if (data.name) {
             if (data.day === "15th April, 2025") {
@@ -61,6 +63,9 @@ function generateBarcode() {
           }
         } else {
           alert("Token not approved!");
+        }
+        } else {
+          alert("Token not found!");
         }
       })
       .catch((error) => console.error("Error:", error));
