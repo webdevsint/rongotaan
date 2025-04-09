@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/styles/globals.css" />
+    <link rel="stylesheet" href="/styles/generate.css" />
+  </head>
+  <body>
+    <div class="form">
+      <h1>Generate Ticket</h1>
+
+      <div class="form-input">
+        <label for="barcodeValue"><b>Token ID:</b></label> <br>
+        <input
+          type="text"
+          id="barcodeValue"
+          name="barcodeValue"
+          minlength="8"
+          maxlength="8"
+          placeholder="..."
+        />
+        <button onclick="generateBarcode()"><b>Generate Ticket</b></button>
+      </div>
+
+      <a href="/admin"><b>Return to token list.</b></a>
+    </div>
+
+    <canvas id="barcodeCanvas"></canvas>
+
+    <div class="ticket-container" id="ticket">
+      <img class="ticket-bg" />
+      <div class="ticket-greetings">
+        <h2>HELLO!</h2>
+        <h1 class="greeting-name"></h1>
+      </div>
+
+      <main>
+        <div class="ticket">
+          <section>
+            <img class="ticket-hero" />
+
+            <div>
+              <img id="barcode-preview-1" />
+            </div>
+          </section>
+
+          <img class="barcode" id="barcode-preview-2" />
+        </div>
+      </main>
+    </div>
+
+    <button
+      onclick="downloadScreenshot('ticket',  `${document.getElementById('barcodeValue').value.trim()} - Rongotaan 1432`)"
+      class="download-btn"
+    >
+      <b>Download</b>
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="/scripts/generate.js"></script>
+  </body>
+</html>

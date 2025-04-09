@@ -10,4 +10,12 @@ router.get("/", (req, res) => {
   }
 });
 
+router.get('/generate', (req, res) => {
+  if (req.session.user) {
+    res.sendFile(path.resolve("./views/admin/generate.html"));
+  } else {
+    res.redirect("/login");
+  }
+})
+
 module.exports = router;

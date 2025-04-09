@@ -19,11 +19,11 @@ header a,
   border-radius: 3px;
 }
 
-.backup {
+.backup, .generate {
   color: #2596be;
 }
 
-.backup:hover {
+.backup:hover, .generate:hover {
   color: white;
   background: #2596be;
 }
@@ -106,4 +106,18 @@ main {
 
 .token button {
   margin-right: 1rem;
+}
+
+
+.verify-button, .generate-button a {
+  color: #2596be;
+}
+
+.verify-button:hover, .generate-button:hover{
+  color: white;
+  background: #2596be;
+}
+
+.generate-button:hover a {
+  color: white;
 }

@@ -1,0 +1,149 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+
+.form {
+  padding: 2rem;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+input {
+  padding: 0.6rem 1rem;
+  background: white;
+  border: none;
+  outline: none;
+  border-radius: 3px 0 0 3px;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+
+button {
+  padding: 0.6rem 1rem;
+  background: white;
+  border: none;
+  outline: none;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  transition: 0.1s;
+  cursor: pointer;
+  border-radius: 0 3px 3px 0;
+  color: #2596be;
+}
+
+button:hover {
+  color: white;
+  background: #2596be;
+}
+
+a {
+  color: #2596be;
+  max-width: max-content;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+canvas {
+  display: none;
+}
+
+#ticket {
+  display: none;
+}
+
+.ticket-container {
+  margin: 1rem;
+  width: 400px;
+  height: 565px;
+  position: relative;
+}
+
+.ticket-container img {
+  width: 400px;
+  height: 565px;
+  position: relative;
+}
+
+.ticket-greetings {
+  top: 1rem;
+  position: absolute;
+  color: white;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-weight: 200;
+}
+
+.ticket-greetings * {
+  font-family: "Bebas Neue", sans-serif;
+}
+
+.ticket-greetings h2 {
+  font-size: 35px;
+}
+
+.ticket-greetings h1 {
+  font-size: 40px;
+}
+
+main {
+  height: 565px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+}
+
+.ticket {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  width: 400px;
+}
+
+.ticket section {
+  position: relative;
+}
+
+.ticket section div {
+  position: absolute;
+  height: 125px;
+  top: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ticket section div img {
+  width: auto;
+  height: 35px;
+  transform: rotate(270deg);
+}
+
+.ticket section img {
+  width: 350px;
+  height: 128px;
+}
+
+.ticket .barcode {
+  width: auto;
+  height: 70px;
+  background: white;
+}
+
+.download-btn {
+  display: none;
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  border-radius: 3px;
+}

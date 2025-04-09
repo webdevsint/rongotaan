@@ -9,7 +9,7 @@ function renderToken(arr, parent) {
 
     const verifyButton = document.createElement("button");
     verifyButton.className = "verify-button";
-    verifyButton.innerHTML = "Approve Token";
+    verifyButton.innerHTML = "<h4>Approve Token</h4>";
     verifyButton.onclick = () => {
       id = token.id;
 
@@ -33,9 +33,17 @@ function renderToken(arr, parent) {
       div.appendChild(verifyButton);
     }
 
+    const generateButton = document.createElement("button");
+    generateButton.className = "generate-button";
+    generateButton.innerHTML = `<a href='/admin/generate?token=${token.id}'><h4>Generate Ticket</h4></a>`;
+
+    if (token.approved === true) {
+      div.appendChild(generateButton);
+    }
+
     const deleteButton = document.createElement("button");
     deleteButton.className = "delete-button";
-    deleteButton.innerHTML = "Revoke Token";
+    deleteButton.innerHTML = "<h4>Revoke Token</h4>";
     deleteButton.ondblclick = () => {
       id = token.id;
 
