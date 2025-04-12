@@ -1,107 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>টিকিট কিনুন- রঙ্গতান</title>
-    <link rel="stylesheet" href="styles/globals.css" />
-    <link rel="stylesheet" href="styles/register.css" />
-    <meta name="title" content="রঙ্গতান ১৪৩২- Rongotaan" />
-    <meta
-      name="description"
-      content="Rongotaan celebrates cultural heritage and unity through vibrant colors and traditional melodies. It's a Nobo Barsho event filled with festive spirit, from traditional beats to colorful art."
-    />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://rongotaan.onrender.com/" />
-    <meta
-      property="og:description"
-      content="Rongotaan celebrates cultural heritage and unity through vibrant colors and traditional melodies. It's a Nobo Barsho event filled with festive spirit, from traditional beats to colorful art."
-    />
-    <meta property="og:image" content="/assets/meta.png" />
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://rongotaan.onrender.com/" />
-    <meta
-      property="twitter:description"
-      content="Rongotaan celebrates cultural heritage and unity through vibrant colors and traditional melodies. It's a Nobo Barsho event filled with festive spirit, from traditional beats to colorful art."
-    />
-    <meta property="twitter:image" content="/assets/meta.png" />
-  </head>
-  <body>
-    <main class="hero">
-      <div class="hero-image">
-        <a href="/"><img src="/assets/rongotaan.png" alt="রঙ্গতান" /></a>
-      </div>
-      <div class="hero-form">
-        <h1>টিকিট কিনুন</h1>
-
-        <form action="/api/register" method="post">
-          <div>
-            <label for="name"><b>Your Name</b></label>
-            <input type="text" placeholder="..." name="name" required />
-          </div>
-
-          <div>
-            <label for="email"><b>Your Email Address</b></label>
-            <input type="email" placeholder="..." name="email" required />
-          </div>
-
-          <div>
-            <label for="contact"><b>Your Contact Number</b></label>
-            <input type="number" placeholder="..." name="contact" required />
-          </div>
-
-          <div>
-            <label for="day"><b>Select Day</b></label>
-
-            <select name="day" id="daySelect">
-              <option value="15th April, 2025">15th April, 2025</option>
-              <option value="16th April, 2025">16th April, 2025</option>
-              <option value="15th & 16th April, 2025">
-                15th & 16th April, 2025
-              </option>
-            </select>
-          </div>
-
-          <p>
-            Registration Fee: <b>২৪০৳/day</b>. Pay via <b>bKash</b> (Send Money)
-            to <b>01949974075</b>.
-          </p>
-
-          <div>
-            <label for="transactionID"><b>bKash Transaction ID</b></label>
-            <input
-              type="text"
-              placeholder="..."
-              name="transactionID"
-              required
-            />
-          </div>
-
-          <p id="receivable">Receivable Amount: <b>240 Taka</b></p>
-
-          <button type="submit"><b>Register</b></button>
-        </form>
-      </div>
-    </main>
-
-    <div class="copyright">
-      <p>
-        Developed by
-        <a href="https://nehanyaser.vercel.app/" target="_blank">Nehan Yaser</a>
-      </p>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>টিকিট কিনুন - রঙ্গতান</title>
+  <link rel="stylesheet" href="styles/globals.css" />
+  <link rel="stylesheet" href="styles/register.css" />
+  <meta name="title" content="রঙ্গতান ১৪৩২- Rongotaan" />
+  <meta
+    name="description"
+    content="Rongotaan celebrates cultural heritage and unity through vibrant colors and traditional melodies. It's a Nobo Barsho event filled with festive spirit, from traditional beats to colorful art."
+  />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://rongotaan.onrender.com/" />
+  <meta
+    property="og:description"
+    content="Rongotaan celebrates cultural heritage and unity through vibrant colors and traditional melodies. It's a Nobo Barsho event filled with festive spirit, from traditional beats to colorful art."
+  />
+  <meta property="og:image" content="/assets/meta.png" />
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://rongotaan.onrender.com/" />
+  <meta
+    property="twitter:description"
+    content="Rongotaan celebrates cultural heritage and unity through vibrant colors and traditional melodies. It's a Nobo Barsho event filled with festive spirit, from traditional beats to colorful art."
+  />
+  <meta property="twitter:image" content="/assets/meta.png" />
+</head>
+<body>
+  <main class="hero">
+    <div class="hero-image">
+      <a href="/"><img src="/assets/rongotaan.png" alt="রঙ্গতান" /></a>
     </div>
+    <div class="hero-form">
+      <h1>টিকিট কিনুন</h1>
 
-    <script>
-      const daySelect = document.getElementById("daySelect");
-      const receivableAmount = document.getElementById("receivable");
+      <form action="/api/register" method="post" id="registrationForm">
+        <div>
+          <label for="name"><b>Your Name</b></label>
+          <input type="text" placeholder="..." name="name" id="name" required />
+        </div>
 
-      daySelect.addEventListener("change", function () {
-        if (this.value === "15th & 16th April, 2025") {
-          receivableAmount.innerHTML = "Receivable Amount: <b>480 Taka</b>";
-        } else {
-          receivableAmount.innerHTML = "Receivable Amount: <b>240 Taka</b>";
+        <div>
+          <label for="email"><b>Your Email Address</b></label>
+          <input type="email" placeholder="..." name="email" id="email" required />
+        </div>
+
+        <div>
+          <label for="contact"><b>Your Contact Number</b></label>
+          <input type="number" placeholder="..." name="contact" id="contact" required />
+        </div>
+
+        <div>
+          <label for="day"><b>Select Day</b></label>
+
+          <select name="day" id="daySelect">
+            <option value="15th April, 2025">15th April, 2025</option>
+            <option value="16th April, 2025">16th April, 2025</option>
+            <option value="15th & 16th April, 2025">
+              15th & 16th April, 2025
+            </option>
+          </select>
+        </div>
+
+        <p>
+          Registration Fee: <b>২৪০৳/day</b>. Pay via <b>bKash</b> (Send Money)
+          to <b>01949974075</b>.
+        </p>
+
+        <div>
+          <label for="transactionID"><b>bKash Transaction ID</b></label>
+          <input
+            type="text"
+            placeholder="..."
+            name="transactionID"
+            id="transactionID"
+            required
+          />
+        </div>
+
+        <p id="receivable">Receivable Amount: <b>240 Taka</b></p>
+
+        <button type="submit"><b>Register</b></button>
+      </form>
+    </div>
+  </main>
+
+  <div class="copyright">
+    <p>
+      Developed by
+      <a href="https://nehanyaser.vercel.app/" target="_blank">Nehan Yaser</a>
+    </p>
+  </div>
+
+  <script>
+    const daySelect = document.getElementById("daySelect");
+    const receivableAmount = document.getElementById("receivable");
+    const registrationForm = document.getElementById("registrationForm");
+    const inputFields = registrationForm.querySelectorAll('input[type="text"], input[type="email"], input[type="number"]');
+
+    function handleScriptInjectionDetected() {
+      console.warn("Potential script injection detected!");
+      alert("Unauthorized script detected in the input. Please remove it.");
+      inputFields.forEach(input => {
+        input.value = input.value.replace(/<script\b[^>]*>([\s\S]*?)<\/script>/gi, '');
+      });
+    }
+
+    function checkScriptInjection(inputValue) {
+      const scriptTagRegex = /<script\b[^>]*>([\s\S]*?)<\/script>/gi;
+      return scriptTagRegex.test(inputValue);
+    }
+
+    function hasSpecialCharacters(inputValue) {
+      const specialCharRegex = /[^a-zA-Z0-9\s]/g;
+      return specialCharRegex.test(inputValue);
+    }
+
+    function handleSpecialCharacterDetected(inputElement) {
+      console.warn("Special characters detected!");
+      alert("Please avoid using special characters in this field.");
+      inputElement.value = inputElement.value.replace(/[^a-zA-Z0-9\s]/g, '');
+    }
+
+    inputFields.forEach(input => {
+      input.addEventListener('input', function() {
+        if (checkScriptInjection(this.value)) {
+          handleScriptInjectionDetected();
+        }
+        if (this.type === 'text' && hasSpecialCharacters(this.value)) {
+          handleSpecialCharacterDetected(this);
         }
       });
-    </script>
-  </body>
+    });
+
+    registrationForm.addEventListener('submit', function(event) {
+      let hasScript = false;
+      let hasSpecialChar = false;
+
+      inputFields.forEach(input => {
+        if (checkScriptInjection(input.value)) {
+          hasScript = true;
+        }
+        if (input.type === 'text' && hasSpecialCharacters(input.value)) {
+          hasSpecialChar = true;
+        }
+      });
+
+      if (hasScript) {
+        event.preventDefault();
+        handleScriptInjectionDetected();
+      }
+
+      if (hasSpecialChar) {
+        event.preventDefault();
+        alert("Please correct the special characters in the form.");
+      }
+    });
+
+    daySelect.addEventListener("change", function () {
+      if (this.value === "15th & 16th April, 2025") {
+        receivableAmount.innerHTML = "Receivable Amount: <b>480 Taka</b>";
+      } else {
+        receivableAmount.innerHTML = "Receivable Amount: <b>240 Taka</b>";
+      }
+    });
+  </script>
+</body>
 </html>
