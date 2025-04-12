@@ -3,6 +3,7 @@ const { nanoid } = require("nanoid");
 const { phone } = require("phone");
 const path = require("path");
 const fs = require("fs");
+const { console } = require("inspector");
 require("dotenv").config();
 
 const key = process.env.API_KEY;
@@ -83,26 +84,45 @@ router.post("/register", (req, res) => {
   const day = req.body.day;
   const transactionID = req.body.transactionID;
 
-  if (validateEmail(email)) {
-    if (phone(contact, { country: "BD" }).isValid) {
-      const payload = {
-        id: nanoid(8),
-        name,
-        email,
-        contact,
-        day,
-        receivable: (day === "15th & 16th April, 2025" ? '480 Taka': '240 Taka'),
-        transactionID,
-        approved: false,
-      };
+  
 
-      saveData(payload);
+  function hasSpecialCharacters(inputValue) {
+    const specialCharRegex = /[^a-zA-Z0-9\s]/g;
+    return specialCharRegex.test(inputValue);
+  }
 
-      res.redirect("/register-success");
+  if (
+    hasSpecialCharacters(name) ||
+    hasSpecialCharacters(transactionID)
+  ) {
+    res.redirect("/registration-failed");
+  } else {
+    if (validateEmail(email)) {
+      if (phone(contact, { country: "BD" }).isValid) {
+        const payload = {
+          id: nanoid(8),
+          name,
+          email,
+          contact,
+          day,
+          receivable: (day === "15th & 16th April, 2025" ? '480 Taka': '240 Taka'),
+          transactionID,
+          approved: false,
+        };
+  
+        saveData(payload);
+        res.redirect("/register-success");
+      } else {
+        res.redirect("/registration-failed");
+      }
     } else {
       res.redirect("/registration-failed");
     }
-  } else res.redirect("/registration-failed");
+  }
+
+
+  // Only proceed with other validations if name and transactionID are clean
+  
 });
 
 router.post("/approve/:id", (req, res) => {
