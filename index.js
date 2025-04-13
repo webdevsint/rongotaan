@@ -24,9 +24,30 @@ app.use(
 app.use(express.static(path.resolve("./public")));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(cors({
-  origin: "https://rongotaan.onrender.com/"
-}));
+
+// Configure CORS to allow only requests from your frontend's origin
+const allowedOrigin = 'https://rongotaan.onrender.com'; // Use env variable
+
+const corsOptions = {
+  origin: (origin, callback) => {
+    // Allow requests with no origin (e.g., server-to-server or mobile apps)
+    if (!origin) return callback(null, true);
+
+    console.log(origin)
+
+    // Check if the incoming origin matches your allowed origin
+    if (allowedOrigin.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error(`Not allowed by CORS: ${origin}`));
+    }
+  },
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+  optionsSuccessStatus: 204,
+};
+
+app.use(cors(corsOptions));
 
 app.get("/", (req, res) => {
   res.sendFile(path.resolve("./views/index.html"));
@@ -42,6 +63,10 @@ app.get("/register-success", (req, res) => {
 
 app.get("/registration-failed", (req, res) => {
   res.sendFile(path.resolve("./views/error.html"));
+});
+
+app.get("/rate-exceeded", (req, res) => {
+  res.sendFile(path.resolve("./views/rate-limit.html"));
 });
 
 app.use("/admin", adminRoutes);

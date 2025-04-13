@@ -19,9 +19,11 @@ const blockedIPs = new Set();
 // Rate limiter for the /register route (max 2 POST requests per minute)
 const registerRateLimiter = rateLimit({
   windowMs: 60 * 1000, // 1 minute window
-  max: 2, // Limit each IP to 2 requests per windowMs
-  message:
-    "Too many registration attempts from this IP, please try again after a minute.",
+  max: 3, // Limit each IP to 2 requests per windowMs
+  message: "Too many registration attempts from this IP, please try again after a minute.",
+  handler: (req, res, next) => { // Add custom handler
+    res.redirect("/rate-exceeded"); // Redirect on rate limit exceed
+  },
   standardHeaders: true,
   legacyHeaders: false,
 });
