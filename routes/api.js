@@ -14,41 +14,12 @@ const router = express.Router();
 const postRequestCounts = new Map();
 const blockedIPs = new Set();
 
-const overallPostRequestLimiter = (req, res, next) => {
-  const clientIP = req.ip;
+// Removed: const overallPostRequestLimiter = (req, res, next) => { ... };
 
-  if (blockedIPs.has(clientIP)) {
-    console.warn(`Blocked (overall limit) request from IP: ${clientIP}`);
-    return res
-      .status(403)
-      .send("Your IP has been blocked due to excessive registration attempts.");
-  }
-
-  if (req.method === "POST" && req.path === "/register") {
-    const currentCount = postRequestCounts.get(clientIP) || 0;
-    postRequestCounts.set(clientIP, currentCount + 1);
-
-    if (currentCount + 1 > 10) {
-      console.warn(
-        `Blocking IP ${clientIP} due to exceeding 20 registration attempts.`
-      );
-      blockedIPs.add(clientIP);
-      postRequestCounts.delete(clientIP);
-      return res
-        .status(429)
-        .send(
-          "Too many registration attempts from this IP. Your IP has been temporarily blocked."
-        );
-    }
-  }
-
-  next();
-};
-
-// Rate limiter for the /register route (max 1 POST requests per minute)
+// Rate limiter for the /register route (max 2 POST requests per minute)
 const registerRateLimiter = rateLimit({
   windowMs: 60 * 1000, // 1 minute window
-  max: 2, // Limit each IP to 1 requests per windowMs
+  max: 2, // Limit each IP to 2 requests per windowMs
   message:
     "Too many registration attempts from this IP, please try again after a minute.",
   standardHeaders: true,
@@ -79,7 +50,7 @@ function validateEmail(email) {
   return regex.test(email);
 }
 
-router.use(overallPostRequestLimiter); // Apply the overall POST request limiter
+// Removed: router.use(overallPostRequestLimiter);
 
 router.get("/tokens", (req, res) => {
   if (req.query.key === key) {
@@ -119,6 +90,7 @@ router.delete("/token/:id", (req, res) => {
 });
 
 router.post("/register", registerRateLimiter, (req, res) => {
+  // Removed IP blocking logic
   const name = req.body.name;
   const email = req.body.email;
   const contact = req.body.contact;
@@ -147,7 +119,7 @@ router.post("/register", registerRateLimiter, (req, res) => {
           approved: false,
         };
 
-        // saveData(payload);
+        saveData(payload);
         res.redirect("/register-success");
       } else {
         res.redirect("/registration-failed");
