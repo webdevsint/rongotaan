@@ -54,7 +54,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/register", (req, res) => {
-  res.sendFile(path.resolve("./views/register.html"));
+  res.sendFile(path.resolve("./views/register_over.html"));
 });
 
 app.get("/register-success", (req, res) => {
