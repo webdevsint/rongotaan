@@ -10,6 +10,14 @@ router.get("/", (req, res) => {
   }
 });
 
+router.get("/register", (req, res) => {
+  if (req.session.user) {
+    res.sendFile(path.resolve("./views/register.html"));
+  } else {
+    res.redirect("/login");
+  }
+});
+
 router.get('/generate', (req, res) => {
   if (req.session.user) {
     res.sendFile(path.resolve("./views/admin/generate.html"));
